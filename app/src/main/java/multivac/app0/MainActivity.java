@@ -24,16 +24,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra("greeter", greeter);
                 startActivity(intent);
             }
         });
-
-        Bundle bundle = getIntent().getExtras();
-
-        if(bundle != null && bundle.containsKey("response")) {
-            String res = (String) bundle.get("response");
-            Toast.makeText(MainActivity.this, res, Toast.LENGTH_LONG).show();
-        }
     }
 }

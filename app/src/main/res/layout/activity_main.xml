@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/primary_dark"
-        android:text="Next"
+        android:text="Login"
         android:textColor="@color/primary_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
