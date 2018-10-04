@@ -32,7 +32,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String phoneNumber = phoneEditText.getText().toString();
 
-                if (phoneNumber != null) {
+                if (phoneNumber != null && !phoneNumber.isEmpty()) {
                     //Pedir el permiso de hacer llamadas.
                     requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE);
                 } else {
