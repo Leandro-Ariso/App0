@@ -16,7 +16,10 @@ import android.widget.Toast;
 public class SecondActivity extends AppCompatActivity {
 
     private EditText phoneEditText;
+    private EditText webPageEditText;
     private ImageButton phoneCallButton;
+    private ImageButton webPageButton;
+
     private final int PHONE_CALL_CODE = 100;
 
     @Override
@@ -26,6 +29,8 @@ public class SecondActivity extends AppCompatActivity {
 
         phoneEditText = findViewById(R.id.SecondActivity_PhoneText);
         phoneCallButton = findViewById(R.id.SecondActivity_PhoneButton);
+        webPageEditText = findViewById(R.id.SecondActivity_WebText);
+        webPageButton = findViewById(R.id.SecondActivity_WebButton);
 
         phoneCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +42,20 @@ public class SecondActivity extends AppCompatActivity {
                     requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE);
                 } else {
                     Toast.makeText(SecondActivity.this, "Ingrese un número de teléfono válido.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        webPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = webPageEditText.getText().toString();
+
+                if (url != null && !url.isEmpty()) {
+                    Intent intentWeb = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"+url));
+                    startActivity(intentWeb);
+                } else {
+                    Toast.makeText(SecondActivity.this, "Ingrese una URL válida.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
