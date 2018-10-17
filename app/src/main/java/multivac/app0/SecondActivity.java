@@ -1,9 +1,12 @@
 package multivac.app0;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
@@ -19,8 +23,11 @@ public class SecondActivity extends AppCompatActivity {
     private EditText webPageEditText;
     private ImageButton phoneCallButton;
     private ImageButton webPageButton;
+    private ImageButton cameraButton;
 
     private final int PHONE_CALL_CODE = 100;
+
+    private final int CAMERA_PICTURE_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,7 @@ public class SecondActivity extends AppCompatActivity {
         phoneCallButton = findViewById(R.id.SecondActivity_PhoneButton);
         webPageEditText = findViewById(R.id.SecondActivity_WebText);
         webPageButton = findViewById(R.id.SecondActivity_WebButton);
+        cameraButton = findViewById(R.id.SecondActivity_CameraButton);
 
         phoneCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +51,14 @@ public class SecondActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(SecondActivity.this, "Ingrese un número de teléfono válido.", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intentCamera, CAMERA_PICTURE_CODE);
             }
         });
 
@@ -59,6 +75,29 @@ public class SecondActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case CAMERA_PICTURE_CODE:
+                if(resultCode == Activity.RESULT_OK) {
+                    Bundle extras = data.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(imageBitmap, 120, 120, false);
+                    cameraButton.setImageBitmap(scaledBitmap);
+
+                } else {
+                    Toast.makeText(SecondActivity.this, "Por favor tome una foto.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 
     @Override
@@ -84,7 +123,6 @@ public class SecondActivity extends AppCompatActivity {
                 }
 
             default:
-
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
                 break;
         }
