@@ -34,6 +34,9 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_myicon);
+
         phoneEditText = findViewById(R.id.SecondActivity_PhoneText);
         phoneCallButton = findViewById(R.id.SecondActivity_PhoneButton);
         webPageEditText = findViewById(R.id.SecondActivity_WebText);
