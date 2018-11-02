@@ -34,8 +34,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        getSupportActionBar().setLogo(R.mipmap.ic_myicon_round);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_myicon);
+        //getSupportActionBar().setIcon(R.mipmap.ic_myicon);
 
         phoneEditText = findViewById(R.id.SecondActivity_PhoneText);
         phoneCallButton = findViewById(R.id.SecondActivity_PhoneButton);
