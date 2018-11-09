@@ -12,22 +12,24 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
 
-    private EditText phoneEditText;
-    private EditText webPageEditText;
-    private ImageButton phoneCallButton;
-    private ImageButton webPageButton;
-    private ImageButton cameraButton;
-
-    private final int PHONE_CALL_CODE = 100;
-
-    private final int CAMERA_PICTURE_CODE = 101;
+    private SeekBar ageSeekBar;
+    private TextView ageTextView;
+    private RadioGroup greetingTypeGroup;
+    private RadioButton helloRadioButton;
+    private RadioButton byeRadioButton;
+    private Button nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,44 @@ public class SecondActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setIcon(R.mipmap.ic_myicon);
 
-        phoneEditText = findViewById(R.id.SecondActivity_PhoneText);
-        phoneCallButton = findViewById(R.id.SecondActivity_PhoneButton);
-        webPageEditText = findViewById(R.id.SecondActivity_WebText);
-        webPageButton = findViewById(R.id.SecondActivity_WebButton);
-        cameraButton = findViewById(R.id.SecondActivity_CameraButton);
+        ageSeekBar = findViewById(R.id.secondActivity_AgeSeekBar);
+        ageTextView = findViewById(R.id.secondActivity_ageTextView);
+        greetingTypeGroup = findViewById(R.id.secondActivity_typeRadioGroup);
+        helloRadioButton = findViewById(R.id.secondActivity_helloRadioButton);
+        byeRadioButton = findViewById(R.id.secondActivity_byeRadioButton);
+        nextButton = findViewById(R.id.secondActivity_nextButton);
+
+        ageTextView.setText("Seleccionar Edad");
+
+        ageSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progress = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                progress = progressValue;
+                ageTextView.setText(progress + " años");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Repository.getInstance().setAge(progress);
+            }
+        });
+
+        greetingTypeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                RadioButton checkedButton = findViewById(checkedId);
+            }
+
+        });
+
 
         phoneCallButton.setOnClickListener(new View.OnClickListener() {
             @Override

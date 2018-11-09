@@ -22,7 +22,7 @@
         />
 
     <Button
-        android:id="@+id/button_main_1"
+        android:id="@+id/mainActivity_nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/primary_dark"

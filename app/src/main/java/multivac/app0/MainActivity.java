@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         //getSupportActionBar().setIcon(R.mipmap.ic_myicon);
 
-        button_next = findViewById(R.id.button_main_1);
+        button_next = findViewById(R.id.mainActivity_nextButton);
 
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
